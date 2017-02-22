@@ -61,10 +61,12 @@ public class WebServer {
 	 * are reserved port numbers for well known services such as HTTP on port
 	 * 80.
 	 */
-	private static int checkPortNumber(int port) throws NumberFormatException {
+	public int checkPortNumber(int port) throws NumberFormatException {
 		if (port < 0 || port > 65535 || port < 1024) {
-			throw new IndexOutOfBoundsException("Invalid port number " + port + " has to be between 1024 - 65535!");
+			System.err.println("Invalid port number " + port + " has to be between 1024 - 65535!");
+			System.exit(1);
 		}
+		
 		return port;
 	}
 }
