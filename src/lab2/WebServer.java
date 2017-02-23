@@ -40,7 +40,7 @@ public class WebServer {
 					System.out.println("Now connected to " + connection.getInetAddress());
 					ClientThread request = new ClientThread(connection);
 					Thread thread = new Thread(request);
-					
+		
 					thread.start();
 				}
 			} catch (IOException e) {

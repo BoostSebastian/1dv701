@@ -17,5 +17,4 @@ public class HttpHeader {
 	public String getContentLength(long length, String CRLF){
 		return "Content-Length: " + length + " " + CRLF;
 	}
-
 }

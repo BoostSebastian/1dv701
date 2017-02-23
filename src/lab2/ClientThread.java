@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
+import lab2.Request.HttpRequest;
 import lab2.Response.HttpResponse;
 
 public class ClientThread implements Runnable {
@@ -51,6 +52,10 @@ public class ClientThread implements Runnable {
 			
 			System.out.println(response.isEntityExist());
 			System.out.println(response.isImageFileExist());
+			outputStream.write(response.getStatus().getBytes());
+			
+			outputStream.write(response.getResponse().getBytes());
+			
 			if(response.isEntityExist()){
 				outputStream.write(response.getEntityBody().getBytes());
 			}
@@ -58,8 +63,6 @@ public class ClientThread implements Runnable {
 			if(response.isImageFileExist()){
 				outputStream.write(response.getBuf());
 			}
-			
-			outputStream.write(response.getResponse().getBytes());
 			outputStream.flush();
 			
 		} catch (IOException e) {
