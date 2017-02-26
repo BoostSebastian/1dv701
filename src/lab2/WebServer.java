@@ -14,27 +14,27 @@ import java.net.Socket;
 
 public class WebServer {
 	/*
-	 * Main class for server echo functionality and thread handling for multiple
+	 * main class for server echo functionality and thread handling for multiple
 	 * connection of clients.
 	 */
 	private ServerSocket server = null;
 	private Socket connection = null;
 	private int myport = 2020;
 
-	// Create instance of server object
+	// create instance of server object
 	public static void main(String[] args) {
 		new WebServer().handleConnection();
 	}
 
-	// Method to handle client connection
+	// method to handle client connection
 	public void handleConnection() {
 		try {
 			checkPortNumber(myport);
-			// Create a server socket using the port number specified
+			// create a server socket using the port number specified
 			server = new ServerSocket(myport);
 			System.out.println("Establishing connection");
 			try {
-				// Server stays on forever
+				// server stays on forever
 				while (true) {
 					System.out.println("Waiting for connection..");
 					
@@ -60,7 +60,7 @@ public class WebServer {
 	}
 
 	/*
-	 * Method to check port number validity. Number ranging between 0 to 1024
+	 * method to check port number validity. Number ranging between 0 to 1024
 	 * are reserved port numbers for well known services such as HTTP on port
 	 * 80.
 	 */

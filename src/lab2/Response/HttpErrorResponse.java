@@ -9,6 +9,7 @@
 package lab2.Response;
 
 public abstract class HttpErrorResponse {
+	
 	protected String status;
 	protected String entityBody = null;
 	

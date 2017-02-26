@@ -51,7 +51,6 @@ public class ClientThread implements Runnable {
 			// append information read from inputStream into a useful string that contains information about the request
 			if ((byteRead = inputStream.read(buf)) != -1) {
 				method_request += new String(buf, 0, byteRead);
-				System.out.println(method_request);
 			}
 
 			System.out.println();
@@ -63,16 +62,21 @@ public class ClientThread implements Runnable {
 			// new instance of HttpResponse in order to execute on the request and return appropriate information and responses.
 			HttpResponse response = new HttpResponse(request, buf);
 			
+			// writes out startline to the client
 			outputStream.write(response.getStatus().getBytes());
+			// writes out headers to the client
 			outputStream.write(response.getResponse().getBytes());
 			
+			// writes out a html entity body for error responses
 			if(response.isEntityExist()){
 				outputStream.write(response.getEntityBody().getBytes());
 			}
 			
+			// writes out png files as raw bytes
 			if(response.isImageFileExist()){
 				outputStream.write(response.getBuf());
 			}
+			// flushes out remaining bytes, if there is any
 			outputStream.flush();
 			
 		} catch (IOException e) {

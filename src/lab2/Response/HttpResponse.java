@@ -35,28 +35,24 @@ public class HttpResponse {
 
 	public HttpResponse(HttpRequest req, byte[] buffer){
 		
-		// sets file name based on HttpeRequest arguement
+		// sets file name based on HttpeRequest argument 
 		setFilename(req.getFilename());
 		
-		// setFile method which sets filepath
+		// setFile method which sets file path
 		setFile(filename);
 
 		// check to see if requested path file is a directory
 		if(file.isDirectory()){
-			if(file.list().length > 0){
-				
+			if(file.list().length > 0){		
 				// search method which looks for index.html file in directory
 				search(file);
-
 				setFile(filename);
 			}
 		}
 		
 		// check if file has permission to be accessed.
 		filePermission(file);
-		
-		if(fileExist(file) || !file_Permission){
-			
+		if(fileExist(file) || !file_Permission){	
 			// if persmission is denied then send denied response 403
 			if(!file_Permission){
 				System.out.println("Permission denied: " + filename);
@@ -106,7 +102,7 @@ public class HttpResponse {
 			doErrorResponse(notOK);
 		} 
 		
-		// 500 response if there is an error with file request such as wrong format.
+		// 500 response if there is an error with file request that is not handled eg. wrong format
 		else {
 			HttpResponseInternalError internalError 
 			= new HttpResponseInternalError();
@@ -115,7 +111,7 @@ public class HttpResponse {
 		}
 	}
 	
-	// check to see if file exists with allowed extensions
+	// check to see if file exists with allowed extension
 	private boolean fileExist(File file){
 		try {
 			fileStream = new FileInputStream(file);
@@ -157,7 +153,8 @@ public class HttpResponse {
 		entityExist = true;
 	}
 
-	/* method which checks if directory has an index.html file in it so that it can be 
+	/* 
+	 * method which checks if directory has an index.html file in it so that it can be 
 	 * displayed as a default when no specific file is specified in directory
 	 */
 	private void search(File file) {
@@ -206,7 +203,8 @@ public class HttpResponse {
 	}
 	
 	
-	/* method which removes "/" from filename and appends "l" the "htm" so that it is not necessary when 
+	/* 
+	 * method which removes "/" from filename and appends "l" the "htm" so that it is not necessary when 
 	 * requesting to be too specific and then sets file path to requested file.
 	 */
 	private void setFile(String path) {
