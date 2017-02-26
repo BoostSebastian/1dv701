@@ -1,3 +1,11 @@
+/*
+ * File:	ClientThread.java 
+ * Course: 	Computer Network
+ * Code: 	IDV701
+ * Author: 	Christofer Nguyen & Jonathan Walkden
+ * Date: 	February, 2017
+ */
+
 package lab2;
 
 import java.io.DataInputStream;
@@ -39,6 +47,8 @@ public class ClientThread implements Runnable {
 		try {
 			// Checks if there is anything to read from the buffer
 			int byteRead = 0;
+			
+			// append information read from inputStream into a useful string that contains information about the request
 			if ((byteRead = inputStream.read(buf)) != -1) {
 				method_request += new String(buf, 0, byteRead);
 				System.out.println(method_request);
@@ -46,14 +56,14 @@ public class ClientThread implements Runnable {
 
 			System.out.println();
 			System.out.println("Recieved message from client: " + method_request);
-
+			
+			// create new instance of HttpRequest in order to get requested file name
 			HttpRequest request = new HttpRequest(method_request);
+			
+			// new instance of HttpResponse in order to execute on the request and return appropriate information and responses.
 			HttpResponse response = new HttpResponse(request, buf);
 			
-			System.out.println(response.isEntityExist());
-			System.out.println(response.isImageFileExist());
 			outputStream.write(response.getStatus().getBytes());
-			
 			outputStream.write(response.getResponse().getBytes());
 			
 			if(response.isEntityExist()){
@@ -80,6 +90,7 @@ public class ClientThread implements Runnable {
 			inputStream.close();
 			outputStream.close();
 			connection.close();
+			System.out.println("Client connection ended..");
 		} catch (IOException e) {
 			System.err.println("Issue with closing down..");
 			e.printStackTrace();

@@ -1,11 +1,12 @@
-package lab2;
 /*
  * File:	WebServer.java 
  * Course: 	Computer Network
  * Code: 	IDV701
- * Author: 	Christofer Nguyen
+ * Author: 	Christofer Nguyen & Jonathan Walkden
  * Date: 	February, 2017
  */
+
+package lab2;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -36,6 +37,8 @@ public class WebServer {
 				// Server stays on forever
 				while (true) {
 					System.out.println("Waiting for connection..");
+					
+					// when connection is made, client thread is created
 					connection = server.accept();
 					System.out.println("Now connected to " + connection.getInetAddress());
 					ClientThread request = new ClientThread(connection);

@@ -1,3 +1,12 @@
+/*
+ * File:	HttpResponsePermissionDenied.java 
+ * Course: 	Computer Network
+ * Code: 	IDV701
+ * Author: 	Christofer Nguyen & Jonathan Walkden
+ * Date: 	February, 2017
+ */
+
+
 package lab2.Response;
 
 public class HttpResponsePermissionDenied extends HttpErrorResponse {
